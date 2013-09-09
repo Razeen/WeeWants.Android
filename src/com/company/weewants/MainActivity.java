@@ -28,14 +28,14 @@ public class MainActivity extends Activity {
     }
 
 
-    private View.OnClickListener goHandler = new View.OnClickListener() {
+private View.OnClickListener goHandler = new View.OnClickListener() {
 
-        @Override
-        public void onClick(final View v) {
-            Intent myIntent = new Intent(MainActivity.this, HubActivity.class);
-            startActivity(myIntent);
+    @Override
+    public void onClick(final View v) {
+        Intent myIntent = new Intent(MainActivity.this, HubActivity.class);
+        startActivity(myIntent);
 
-        }
+    }
 
 };
 }
