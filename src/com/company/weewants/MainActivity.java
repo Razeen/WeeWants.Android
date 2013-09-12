@@ -9,8 +9,12 @@ import android.view.Window;
 import android.widget.ImageButton;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
+import com.parse.ParseException;
 import com.parse.ParseInstallation;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 import com.parse.PushService;
+import com.parse.SignUpCallback;
 
 public class MainActivity extends Activity {
 
@@ -25,11 +29,35 @@ public class MainActivity extends Activity {
         imageButton1.setOnClickListener(goHandler);
         // parse sdk initiliaze
         Parse.initialize(this, "FQEHCb7g6J0pPKokLMdYfyfDgG9CP1gkR9tgEhms", "FIokZyK7sf7vRmpoybJ8ZQeA5WkCQKj6LWOz8PbK");
-        //specify default activity to handle push notifications
-        PushService.setDefaultPushCallback(this, MainActivity.class);
-        ParseInstallation.getCurrentInstallation().saveInBackground();
+  ;
         //tracking
         ParseAnalytics.trackAppOpened(getIntent());
+
+        // test
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();
+
+
+        // register
+        ParseUser user = new ParseUser();
+        user.setUsername("my name");
+        user.setPassword("my pass");
+        user.setEmail("email@example.com");
+
+// other fields can be set just like with ParseObject
+        user.put("phone", "650-253-0000");
+
+        user.signUpInBackground(new SignUpCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    // Hooray! Let them use the app now.
+                } else {
+                    // Sign up didn't succeed. Look at the ParseException
+                    // to figure out what went wrong
+                }
+            }
+        });
 
     }
 
